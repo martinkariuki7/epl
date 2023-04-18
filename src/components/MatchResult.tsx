@@ -1,20 +1,15 @@
-import * as React from "react";
+import { HandleMatchResults } from "../pages/Matches";
 
 interface Props {
   homeTeam: number;
   awayTeam: number;
   matchDate: string;
   matchTime: string;
-  ispostponed: Boolean;
+  ispostponed: boolean;
   homeTeamGoals: string;
   awayTeamGoals: string;
-  handleTeamName: (num: number) => string | JSX.Element[];
-  handleMatchResults: (
-    isPostponed: Boolean,
-    home_team_goals: string,
-    match_date: string,
-    match_time: string
-  ) => JSX.Element[];
+  handleTeamName: (num: number) => JSX.Element | string;
+  handleMatchResults: HandleMatchResults;
 }
 
 const MatchResults = ({

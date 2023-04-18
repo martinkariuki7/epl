@@ -1,16 +1,13 @@
-import { Match } from "./Matches";
+import { Dispatch, SetStateAction } from "react";
+import { Match, HandleMatchResults } from "./Matches";
 import MatchResults from "../components/MatchResult";
 
 interface Props {
   matches: Match[];
   teamId: number;
-  handleTeamName: (num: number) => string | JSX.Element[];
-  handleMatchResults: (
-    isPostponed: Boolean,
-    home_team_goals: string,
-    match_date: string,
-    match_time: string
-  ) => JSX.Element[];
+  setMatches: Dispatch<SetStateAction<Match[]>>;
+  handleTeamName: (id: number) => JSX.Element | string;
+  handleMatchResults: HandleMatchResults;
 }
 
 interface SingleMatch {

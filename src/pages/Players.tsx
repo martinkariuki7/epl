@@ -1,19 +1,21 @@
 export interface PlayersInterface {
-  players: [
-    {
-      title: {
-        rendered: string;
-      };
-      id: number;
-      fimg_url: string;
-      acf: {
-        position: string;
-      };
-    }
-  ];
+  title: {
+    rendered: string;
+  };
+  id: number;
+  fimg_url: string;
+  acf: {
+    position: string;
+  };
 }
 
-const Players = ({ players }: PlayersInterface) => {
+interface Props {
+  players: PlayersInterface[];
+}
+
+export interface PlayersInterfaceArray extends Array<PlayersInterface> {}
+
+const Players = ({ players }: Props) => {
   return (
     <div className="my-container players-wrapper">
       {players.map((player) => (

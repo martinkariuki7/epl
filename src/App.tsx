@@ -14,18 +14,24 @@ import Stats from "./pages/Stats";
 import Players from "./pages/Players";
 import SingleTeamMatches from "./pages/SingleTeamMatches";
 
+import { PlayersInterface, PlayersInterfaceArray } from "./pages/Players";
+import { HandleMatchResults, Match } from "./pages/Matches";
+
 import { Expand } from "@theme-toggles/react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@theme-toggles/react/css/Expand.css";
 import "./App.css";
 
+interface FetchTeamsResponse extends Array<Team> {}
+interface FetchMatchesResponse extends Array<Match> {}
+
 interface Team {
-  id?: number;
-  title?: {
+  id: number;
+  title: {
     rendered: string;
   };
-  fimg_url?: string;
+  fimg_url: string;
 }
 
 const App = () => {
@@ -36,10 +42,10 @@ const App = () => {
   const [isToggled, setToggle] = useState(true);
   const [theme, setTheme] = useState("dark");
   const [isLoading, setLoading] = useState(false);
-  const [teams, setTeams] = useState([]);
+  const [teams, setTeams] = useState<Team[]>([]);
   const [error, setError] = useState("");
-  const [players, setPlayers] = useState([]);
-  const [matches, setMatches] = useState([]);
+  const [players, setPlayers] = useState<PlayersInterface[]>([]);
+  const [matches, setMatches] = useState<Match[]>([]);
   const [teamId, setTeamId] = useState(0);
   const navigate = useNavigate(); // Hook into the navigate
 
@@ -52,11 +58,15 @@ const App = () => {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const teamsResponse = await axios.get(API_TEAMS_URL);
+      const teamsResponse = await axios.get<FetchTeamsResponse>(API_TEAMS_URL);
       setTeams(teamsResponse.data);
-      const matchesResponse = await axios.get(API_FIXTURES_URL);
+      const matchesResponse = await axios.get<FetchMatchesResponse>(
+        API_FIXTURES_URL
+      );
       setMatches(matchesResponse.data);
-      const playersResponse = await axios.get(API_PLAYERS_URL);
+      const playersResponse = await axios.get<PlayersInterfaceArray>(
+        API_PLAYERS_URL
+      );
       setPlayers(playersResponse.data);
       setLoading(false);
     } catch (err) {
@@ -86,13 +96,12 @@ const App = () => {
   };
 
   // Handle Match results
-  // Display match results
-  const handleMatchResults = (
-    ispostponed: Boolean,
-    homeTeamGoals: string,
-    matchDate: string,
-    matchTime: string
-  ) => {
+  const handleMatchResults: HandleMatchResults = (
+    ispostponed,
+    home_team_goals,
+    match_date,
+    match_time
+  ): JSX.Element => {
     if (ispostponed) {
       return (
         <>
@@ -100,11 +109,11 @@ const App = () => {
           <span>Time TBD</span>
         </>
       );
-    } else if (homeTeamGoals !== "") {
+    } else if (home_team_goals !== "") {
       return (
         <>
           <span>FT</span>
-          <span>{formatDate(matchDate)}</span>
+          <span>{formatDate(match_date)}</span>
           <img
             src="../match-highlights.png"
             alt="Match highlights"
@@ -115,8 +124,8 @@ const App = () => {
     } else {
       return (
         <div>
-          <span>{formatDate(matchDate)}</span>
-          <span>{formatTime(matchTime)}</span>
+          <span>{formatDate(match_date)}</span>
+          <span>{formatTime(match_time)}</span>
         </div>
       );
     }
@@ -124,23 +133,17 @@ const App = () => {
 
   // Format Team Name from Team ID
   const handleTeamName = (id: number): JSX.Element | string => {
-    //@ts-ignore
-    const team = teams.find((team) => team.id === id);
-    if (team) {
+    const team: Team | undefined = teams.find((team) => team?.id === id);
+    if (team !== undefined) {
       return (
         <>
           <img
             className="matches-logo"
-            //@ts-ignore
             src={team.fimg_url}
-            //@ts-ignore
             alt={team?.title?.rendered}
           />
 
-          {
-            //@ts-ignore
-            team.title.rendered
-          }
+          {team.title.rendered}
         </>
       );
     }
@@ -170,14 +173,11 @@ const App = () => {
         <Route
           path="/matches"
           element={
-            //@ts-ignore
             <Matches
-              teams={teams}
+              //teams={teams}
               matches={matches}
-              setMatches={setMatches}
-              //@ts-ignore
+              //setMatches={setMatches}
               handleTeamName={handleTeamName}
-              //@ts-ignore
               handleMatchResults={handleMatchResults}
             />
           }
@@ -189,24 +189,14 @@ const App = () => {
               teamId={teamId}
               matches={matches}
               setMatches={setMatches}
-              //@ts-ignore
               handleTeamName={handleTeamName}
-              //@ts-ignore
               handleMatchResults={handleMatchResults}
             />
           }
         />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/stats" element={<Stats />} />
-        <Route
-          path="/players"
-          element={
-            <Players
-              //@ts-ignore
-              players={players}
-            />
-          }
-        />
+        <Route path="/players" element={<Players players={players} />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Expand
