@@ -1,6 +1,9 @@
 import { useState } from "react";
 import _ from "lodash";
 import { HandleTeamMatches, Team } from "../App";
+import winIcon from "../assets/win.svg";
+import drawIcon from "../assets/draw.svg";
+import lostIcon from "../assets/lost.svg";
 
 interface SortColumn {
   path: string;
@@ -161,11 +164,11 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
               <td>{points}</td>
               <td className="win-draw-lost">
                 <div className="d-flex justify-content-center">
-                  <img src="/win.svg" alt="win icon" />
-                  <img src="/win.svg" alt="win icon" />
-                  <img src="/win.svg" alt="win icon" />
-                  <img src="/draw.svg" alt="draw icon" />
-                  <img src="/lost.svg" alt="lost icon" />
+                  <img src={winIcon} alt="win icon" />
+                  <img src={winIcon} alt="win icon" />
+                  <img src={winIcon} alt="win icon" />
+                  <img src={drawIcon} alt="draw icon" />
+                  <img src={lostIcon} alt="lost icon" />
                 </div>
               </td>
             </tr>

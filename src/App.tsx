@@ -13,6 +13,7 @@ import NewsPage from "./pages/News";
 import Stats from "./pages/Stats";
 import Players from "./pages/Players";
 import SingleTeamMatches from "./pages/SingleTeamMatches";
+import MatchHighlightsIcon from "./assets/match-highlights.png";
 
 import { PlayersInterface, PlayersInterfaceArray } from "./pages/Players";
 import { HandleMatchResults, Match } from "./pages/Matches";
@@ -130,7 +131,7 @@ const App = () => {
           <span>FT</span>
           <span>{formatDate(match_date)}</span>
           <img
-            src="../match-highlights.png"
+            src={MatchHighlightsIcon}
             alt="Match highlights"
             className="mt-1"
           />
