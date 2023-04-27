@@ -1,4 +1,4 @@
-import { HandleMatchResults } from "../pages/Matches";
+import { HandleMatchResults, HandleTeamName } from "../pages/Matches";
 
 interface Props {
   homeTeam: number;
@@ -8,7 +8,7 @@ interface Props {
   ispostponed: boolean;
   homeTeamGoals: string;
   awayTeamGoals: string;
-  handleTeamName: (num: number) => JSX.Element | string;
+  handleTeamName: HandleTeamName;
   handleMatchResults: HandleMatchResults;
 }
 

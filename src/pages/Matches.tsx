@@ -25,9 +25,13 @@ export interface HandleMatchResults {
   ): JSX.Element;
 }
 
+export interface HandleTeamName {
+  (id: number): JSX.Element | string;
+}
+
 interface Props {
   matches: Match[];
-  handleTeamName: (id: number) => JSX.Element | string;
+  handleTeamName: HandleTeamName;
   handleMatchResults: HandleMatchResults;
 }
 

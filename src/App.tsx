@@ -26,12 +26,27 @@ import "./App.css";
 interface FetchTeamsResponse extends Array<Team> {}
 interface FetchMatchesResponse extends Array<Match> {}
 
-interface Team {
+export interface Team {
   id: number;
   title: {
     rendered: string;
   };
   fimg_url: string;
+  acf: {
+    goal_difference: string;
+    goals_against: string;
+    goals_for: string;
+    last_5: string;
+    matches_drawn: string;
+    matches_lost: string;
+    matches_played: string;
+    matches_won: string;
+    points: string;
+  };
+}
+
+export interface HandleTeamMatches {
+  (id: number): void;
 }
 
 const App = () => {
@@ -163,20 +178,14 @@ const App = () => {
         <Route
           index
           element={
-            <Standings
-              teams={teams}
-              setTeams={setTeams}
-              handleTeamMatches={handleTeamMatches}
-            />
+            <Standings teams={teams} handleTeamMatches={handleTeamMatches} />
           }
         />
         <Route
           path="/matches"
           element={
             <Matches
-              //teams={teams}
               matches={matches}
-              //setMatches={setMatches}
               handleTeamName={handleTeamName}
               handleMatchResults={handleMatchResults}
             />

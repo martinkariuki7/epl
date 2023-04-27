@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
-import { Match, HandleMatchResults } from "./Matches";
+import { Match, HandleMatchResults, HandleTeamName } from "./Matches";
 import MatchResults from "../components/MatchResult";
 
 interface Props {
   matches: Match[];
   teamId: number;
   setMatches: Dispatch<SetStateAction<Match[]>>;
-  handleTeamName: (id: number) => JSX.Element | string;
+  handleTeamName: HandleTeamName;
   handleMatchResults: HandleMatchResults;
 }
 
@@ -28,15 +28,11 @@ const SingleTeamMatches = ({
 }: Props) => {
   const allMatches: SingleMatch[] = [];
 
-  // Loop through matches array
+  // Gather all matches into a simple array
   matches.forEach((matchDay) => {
-    // Check if acf.matches exists and is an array
     if (Array.isArray(matchDay.acf.matches)) {
-      // Loop through acf.matches array
       matchDay.acf.matches.forEach((match): void => {
         if (match.home_team === teamId || match.away_team === teamId)
-          // Push each match object into the allMatches array
-          // @ts-ignore
           allMatches.push(match);
       });
     }

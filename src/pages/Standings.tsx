@@ -1,15 +1,16 @@
+import { Dispatch, SetStateAction } from "react";
+import { HandleTeamMatches, Team } from "../App";
 import Table from "../components/Table";
 
-export interface StandingsInterface {}
-//@ts-ignore
-const Standings = ({ teams, setTeams, handleTeamMatches }) => {
+interface Props {
+  teams: Team[];
+  handleTeamMatches: HandleTeamMatches;
+}
+
+const Standings = ({ teams, handleTeamMatches }: Props) => {
   return (
     <div className="my-container">
-      <Table
-        teams={teams}
-        setTeams={setTeams}
-        handleTeamMatches={handleTeamMatches}
-      />
+      <Table teams={teams} handleTeamMatches={handleTeamMatches} />
     </div>
   );
 };

@@ -1,19 +1,24 @@
 import { useState } from "react";
 import _ from "lodash";
-import { useNavigate } from "react-router-dom";
+import { HandleTeamMatches, Team } from "../App";
 
 interface SortColumn {
   path: string;
   order: boolean | "asc" | "desc";
 }
 
-const Table = ({ teams, handleTeamMatches }: any) => {
+interface Props {
+  teams: Team[];
+  handleTeamMatches: HandleTeamMatches;
+}
+
+const Table = ({ teams, handleTeamMatches }: Props) => {
   const [sortColumn, setSortColumn] = useState<SortColumn>({
     path: "acf.points",
     order: "desc",
   });
 
-  const getColumnValue = (team: any, column: string) => {
+  const getColumnValue = (team: Team, column: string) => {
     switch (column) {
       case "acf.matches_played":
         return team.acf.matches_played;
@@ -123,8 +128,19 @@ const Table = ({ teams, handleTeamMatches }: any) => {
         </tr>
       </thead>
       <tbody>
-        {sorted.map((team: any, index: number) => {
-          const { acf } = team;
+        {sorted.map((team: Team, index: number) => {
+          const {
+            acf: {
+              matches_played,
+              matches_won,
+              matches_drawn,
+              matches_lost,
+              goals_for,
+              goals_against,
+              goal_difference,
+              points,
+            },
+          } = team;
           return (
             <tr key={team.id} onClick={() => handleTeamMatches(team.id)}>
               <th>{index + 1}</th>
@@ -135,14 +151,14 @@ const Table = ({ teams, handleTeamMatches }: any) => {
                 />
                 {team.title.rendered}
               </td>
-              <td>{acf.matches_played}</td>
-              <td>{acf.matches_won}</td>
-              <td>{acf.matches_drawn}</td>
-              <td>{acf.matches_lost}</td>
-              <td>{acf.goals_for}</td>
-              <td>{acf.goals_against}</td>
-              <td>{parseInt(acf.goal_difference)}</td>
-              <td>{acf.points}</td>
+              <td>{matches_played}</td>
+              <td>{matches_won}</td>
+              <td>{matches_drawn}</td>
+              <td>{matches_lost}</td>
+              <td>{goals_for}</td>
+              <td>{goals_against}</td>
+              <td>{parseInt(goal_difference)}</td>
+              <td>{points}</td>
               <td className="win-draw-lost">
                 <div className="d-flex justify-content-center">
                   <img src="/win.svg" alt="win icon" />
