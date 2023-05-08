@@ -142,10 +142,14 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
               goals_against,
               goal_difference,
               points,
+              team_color,
             },
           } = team;
           return (
-            <tr key={team.id} onClick={() => handleTeamMatches(team.id)}>
+            <tr
+              key={team.id}
+              onClick={() => handleTeamMatches(team.id, team_color)}
+            >
               <th>{index + 1}</th>
               <td className="team-branding" colSpan={8}>
                 <img

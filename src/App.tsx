@@ -43,11 +43,12 @@ export interface Team {
     matches_played: string;
     matches_won: string;
     points: string;
+    team_color: string;
   };
 }
 
 export interface HandleTeamMatches {
-  (id: number): void;
+  (id: number, color: string): void;
 }
 
 const App = () => {
@@ -63,6 +64,7 @@ const App = () => {
   const [players, setPlayers] = useState<PlayersInterface[]>([]);
   const [matches, setMatches] = useState<Match[]>([]);
   const [teamId, setTeamId] = useState(0);
+  const [teamColor, setTeamColor] = useState("#341449");
   const navigate = useNavigate(); // Hook into the navigate
 
   const toggleTheme = () => {
@@ -105,9 +107,10 @@ const App = () => {
   }, []);
 
   // Handle programmatic navigation to a single team's matches
-  const handleTeamMatches = (id: number) => {
+  const handleTeamMatches = (id: number, color: string) => {
     const url = "/matches/" + id;
     setTeamId(id);
+    setTeamColor(color);
     navigate(url); // Call navigate function with the desired URL
   };
 
@@ -168,7 +171,7 @@ const App = () => {
 
   return (
     <div className="app-wrapper">
-      <AppHeader />
+      <AppHeader teamColor={teamColor ? teamColor : "#341449"} />
       {error && <p className="text-danger mt-3 mb-3 text-center">{error}</p>}
       {isLoading && (
         <div className="preloader">

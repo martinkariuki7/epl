@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 
-const AppHeader = () => {
+interface Props {
+  teamColor: string;
+}
+
+const AppHeader = ({ teamColor }: Props) => {
   return (
-    <div className="app-header">
+    <div className="app-header" style={{ backgroundColor: teamColor }}>
       <ul>
         <Link to="/matches">
           <li>Matches</li>

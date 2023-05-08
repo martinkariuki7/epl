@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { HandleTeamMatches, Team } from "../App";
 import Table from "../components/Table";
 
