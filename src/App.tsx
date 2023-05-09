@@ -18,8 +18,6 @@ import MatchHighlightsIcon from "./assets/match-highlights.png";
 import { PlayersInterface, PlayersInterfaceArray } from "./pages/Players";
 import { HandleMatchResults, Match } from "./pages/Matches";
 
-import { Expand } from "@theme-toggles/react";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@theme-toggles/react/css/Expand.css";
 import "./App.css";
@@ -48,7 +46,7 @@ export interface Team {
 }
 
 export interface HandleTeamMatches {
-  (id: number, color: string): void;
+  (id: number, color: string, teamName: string): void;
 }
 
 const App = () => {
@@ -56,8 +54,6 @@ const App = () => {
   const API_FIXTURES_URL = import.meta.env.VITE_APP_API_FIXTURES_URL;
   const API_PLAYERS_URL = import.meta.env.VITE_APP_API_PLAYERS_URL;
 
-  const [isToggled, setToggle] = useState(true);
-  const [theme, setTheme] = useState("dark");
   const [isLoading, setLoading] = useState(false);
   const [teams, setTeams] = useState<Team[]>([]);
   const [error, setError] = useState("");
@@ -65,12 +61,8 @@ const App = () => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [teamId, setTeamId] = useState(0);
   const [teamColor, setTeamColor] = useState("#341449");
+  const [teamName, setTeamName] = useState("");
   const navigate = useNavigate(); // Hook into the navigate
-
-  const toggleTheme = () => {
-    setToggle(!isToggled);
-    setTheme(theme === "light" ? "dark" : "light");
-  };
 
   //
   const fetchData = useCallback(async () => {
@@ -96,22 +88,18 @@ const App = () => {
     }
   }, []);
 
-  // Dark/Light mode effect
-  useEffect(() => {
-    document.documentElement.setAttribute("data-bs-theme", theme);
-  }, [theme]);
-
   // Fetch teams data effect
   useEffect(() => {
     fetchData();
   }, []);
 
   // Handle programmatic navigation to a single team's matches
-  const handleTeamMatches = (id: number, color: string) => {
+  const handleTeamMatches = (id: number, color: string, teamName: string) => {
     const url = "/matches/" + id;
     setTeamId(id);
     setTeamColor(color);
-    navigate(url); // Call navigate function with the desired URL
+    setTeamName(teamName);
+    navigate(url);
   };
 
   // Handle Match results
@@ -171,7 +159,10 @@ const App = () => {
 
   return (
     <div className="app-wrapper">
-      <AppHeader teamColor={teamColor ? teamColor : "#341449"} />
+      <AppHeader
+        teamColor={teamColor ? teamColor : "#341449"}
+        teamName={teamName}
+      />
       {error && <p className="text-danger mt-3 mb-3 text-center">{error}</p>}
       {isLoading && (
         <div className="preloader">
@@ -212,12 +203,6 @@ const App = () => {
         <Route path="/players" element={<Players players={players} />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-      <Expand
-        duration={750}
-        toggled={isToggled}
-        toggle={toggleTheme}
-        className="theme-toggle"
-      />
     </div>
   );
 };

@@ -133,6 +133,7 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
       <tbody>
         {sorted.map((team: Team, index: number) => {
           const {
+            title: { rendered: team_name },
             acf: {
               matches_played,
               matches_won,
@@ -148,7 +149,7 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
           return (
             <tr
               key={team.id}
-              onClick={() => handleTeamMatches(team.id, team_color)}
+              onClick={() => handleTeamMatches(team.id, team_color, team_name)}
             >
               <th>{index + 1}</th>
               <td className="team-branding" colSpan={8}>

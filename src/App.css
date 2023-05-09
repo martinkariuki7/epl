@@ -52,11 +52,6 @@ tr:hover {
   margin: 3px 5px 0 0;
 }
 
-.theme-toggle {
-  position: absolute;
-  inset: 2em 2em auto auto;
-}
-
 .theme-toggle svg {
   width: 1.5rem;
   height: 1.5rem;
@@ -64,12 +59,18 @@ tr:hover {
 
 /** App header **/
 .app-header {
-  /* position: fixed;
-  inset: 0 0 auto auto;
-  width: 100%; */
   background-color: var(--purple);
   padding: 3rem;
   margin: 0 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-header .team-name {
+  color: white;
+  background-color: transparent;
+  border: none;
 }
 
 .app-header ul {
