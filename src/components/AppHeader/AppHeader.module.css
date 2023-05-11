@@ -1,0 +1,43 @@
+.appHeader {
+  background-color: var(--purple);
+  padding: 3rem;
+  margin: 0 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appHeader .team-name {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+
+.appHeader ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.appHeader ul li {
+  margin: 0 20px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+}
+
+/** Theme toggle **/
+.themeToggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: white;
+}
+
+/* Team name button */
+.teamName {
+  background-color: transparent;
+  border: none;
+  color: white;
+}

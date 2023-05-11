@@ -1,4 +1,4 @@
-import MatchResults from "../components/MatchResult";
+import MatchResults from "../components/MatchResult/MatchResult";
 
 export interface Match {
   acf: {
@@ -40,12 +40,28 @@ const Matches = ({
   handleTeamName,
   handleMatchResults,
 }: Props): JSX.Element => {
+  const style1 = {
+    padding: "1rem 0",
+    width: "min(100% - 2rem, 752px)",
+    marginInline: "auto",
+  };
+
+  const style2 = {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    borderTop: "1px solid #333",
+    borderBottom: "1px solid #333",
+    padding: "0 0.5rem",
+    width: "min(100% - 2rem, 752px)",
+    marginInline: "auto",
+  };
+
   return (
     <div>
       {matches.map(({ acf: { matches }, id, title: { rendered } }) => (
         <div key={id}>
-          <div className="my-container matchday-title">{`${rendered} of 38`}</div>
-          <div className="my-container matches-wrapper">
+          <div style={style1}>{`${rendered} of 38`}</div>
+          <div style={style2}>
             {matches.map(
               ({
                 home_team,

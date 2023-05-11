@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import { Link } from "react-router-dom";
 import { Expand } from "@theme-toggles/react";
+import "@theme-toggles/react/css/Expand.css";
+import styles from "./AppHeader.module.css";
 
 interface Props {
   teamColor: string;
@@ -35,10 +36,12 @@ const AppHeader = ({ teamColor, teamName }: Props) => {
     document.documentElement.setAttribute("data-bs-theme", theme);
   }, [theme]);
 
+  const { appHeader, teamName: teamLabel, themeToggle } = styles;
+
   return (
-    <div className="app-header" style={{ backgroundColor: teamColor }}>
+    <div className={appHeader} style={{ backgroundColor: teamColor }}>
       {routeType === "matches" && (
-        <button className="team-name" onClick={() => navigate(-1)}>
+        <button className={teamLabel} onClick={() => navigate(-1)}>
           ← {teamName}
         </button>
       )}
@@ -65,7 +68,7 @@ const AppHeader = ({ teamColor, teamName }: Props) => {
           duration={750}
           toggled={isToggled}
           toggle={toggleTheme}
-          className="theme-toggle"
+          className={themeToggle}
         />
       </div>
     </div>

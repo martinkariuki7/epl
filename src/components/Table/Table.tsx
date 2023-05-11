@@ -1,9 +1,10 @@
 import { useState } from "react";
 import _ from "lodash";
-import { HandleTeamMatches, Team } from "../App";
-import winIcon from "../assets/win.svg";
-import drawIcon from "../assets/draw.svg";
-import lostIcon from "../assets/lost.svg";
+import { HandleTeamMatches, Team } from "../../App";
+import winIcon from "../../assets/win.svg";
+import drawIcon from "../../assets/draw.svg";
+import lostIcon from "../../assets/lost.svg";
+import styles from "./Table.module.css";
 
 interface SortColumn {
   path: string;
@@ -56,7 +57,7 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
   };
 
   return (
-    <table className="table table-hover">
+    <table className={`table table-hover ${styles.table}`}>
       <thead>
         <tr>
           <th scope="col">Club</th>
@@ -152,7 +153,7 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
               onClick={() => handleTeamMatches(team.id, team_color, team_name)}
             >
               <th>{index + 1}</th>
-              <td className="team-branding" colSpan={8}>
+              <td className={styles.teamBranding} colSpan={8}>
                 <img
                   src={team.fimg_url ? team.fimg_url : ""}
                   alt={team.title.rendered + "logo"}
@@ -167,7 +168,7 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
               <td>{goals_against}</td>
               <td>{parseInt(goal_difference)}</td>
               <td>{points}</td>
-              <td className="win-draw-lost">
+              <td className={styles.winDrawLost}>
                 <div className="d-flex justify-content-center">
                   <img src={winIcon} alt="win icon" />
                   <img src={winIcon} alt="win icon" />

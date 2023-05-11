@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import { formatDate } from "./utils/FormatDate";
 import { formatTime } from "./utils/FormatTime";
 
-import AppHeader from "./components/AppHeader";
+import AppHeader from "./components/AppHeader/AppHeader";
 import Standings from "./pages/Standings";
 import NotFound from "./pages/NotFound";
 import Matches from "./pages/Matches";
@@ -19,7 +19,6 @@ import { PlayersInterface, PlayersInterfaceArray } from "./pages/Players";
 import { HandleMatchResults, Match } from "./pages/Matches";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@theme-toggles/react/css/Expand.css";
 import "./App.css";
 
 interface FetchTeamsResponse extends Array<Team> {}
@@ -145,7 +144,7 @@ const App = () => {
       return (
         <>
           <img
-            className="matches-logo"
+            style={{ width: "21px", height: "auto", marginRight: "10px" }}
             src={team.fimg_url}
             alt={team?.title?.rendered}
           />

@@ -1,0 +1,20 @@
+table {
+  font-family: var(--body-font);
+  font-size: 14px;
+  min-width: 577px;
+}
+
+tr:hover {
+  cursor: pointer;
+}
+
+.teamBranding img {
+  width: 24px;
+  height: auto;
+  margin-right: 10px;
+}
+.winDrawLost img {
+  width: 14px;
+  height: auto;
+  margin: 3px 5px 0 0;
+}

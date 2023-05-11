@@ -1,5 +1,5 @@
 import { HandleTeamMatches, Team } from "../App";
-import Table from "../components/Table";
+import Table from "../components/Table/Table";
 
 interface Props {
   teams: Team[];

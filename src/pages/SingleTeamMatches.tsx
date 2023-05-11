@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Match, HandleMatchResults, HandleTeamName } from "./Matches";
-import MatchResults from "../components/MatchResult";
+import MatchResults from "../components/MatchResult/MatchResult";
 
 interface Props {
   matches: Match[];
@@ -38,8 +38,18 @@ const SingleTeamMatches = ({
     }
   });
 
+  const styles = {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    borderTop: "1px solid #333",
+    borderBottom: "1px solid #333",
+    padding: "0 0.5rem",
+    width: "min(100% - 2rem, 752px)",
+    marginInline: "auto",
+  };
+
   return (
-    <div className="my-container matches-wrapper">
+    <div style={styles}>
       {allMatches.map((match) => (
         <MatchResults
           key={allMatches.indexOf(match)}

@@ -1,4 +1,5 @@
-import { HandleMatchResults, HandleTeamName } from "../pages/Matches";
+import { HandleMatchResults, HandleTeamName } from "../../pages/Matches";
+import styles from "./MatchResult.module.css";
 
 interface Props {
   homeTeam: number;
@@ -24,23 +25,27 @@ const MatchResults = ({
   handleMatchResults,
 }: Props) => {
   return (
-    <div className="single-match" key={`${homeTeam}-${awayTeam}`}>
-      <div className="teams-playing">
-        <div className="home-team">
+    <div className={styles.singleMatch} key={`${homeTeam}-${awayTeam}`}>
+      <div className={styles.teamsPlaying}>
+        <div className={styles.homeTeam}>
           <span>{handleTeamName(homeTeam)}</span>
           <span
             className={
-              homeTeamGoals > awayTeamGoals ? "scores winner" : "scores"
+              homeTeamGoals > awayTeamGoals
+                ? [styles.scores, styles.winner].join(" ")
+                : styles.scores
             }
           >
             {homeTeamGoals}
           </span>
         </div>
-        <div className="away-team">
+        <div className={styles.awayTeam}>
           <span>{handleTeamName(awayTeam)}</span>
           <span
             className={
-              awayTeamGoals > homeTeamGoals ? "scores winner" : "scores"
+              awayTeamGoals > homeTeamGoals
+                ? [styles.scores, styles.winner].join(" ")
+                : styles.scrores
             }
           >
             {awayTeamGoals}
@@ -48,7 +53,7 @@ const MatchResults = ({
         </div>
       </div>
 
-      <div className="match-results">
+      <div className={styles.matchResults}>
         {handleMatchResults(ispostponed, homeTeamGoals, matchDate, matchTime)}
       </div>
     </div>

@@ -1,0 +1,61 @@
+.singleMatch {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  padding: 2.5rem 0;
+  /* border-bottom: 1px solid var(--gray); */
+  align-items: center;
+}
+
+.singleMatch:nth-child(n + 3) {
+  border-top: 1px solid var(--gray);
+}
+
+.singleMatch:nth-child(odd) {
+  border-right: 1px solid var(--gray);
+}
+.singleMatch:nth-child(even) {
+  padding-left: 2.5rem;
+}
+.singleMatch .matchResults {
+  border-left: 1px solid var(--gray);
+  padding: 0 0.5rem;
+  text-align: center;
+  font-size: 85%;
+}
+
+.teamsPlaying {
+  align-items: center;
+}
+
+.teamsPlaying span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 90%;
+}
+
+.homeTeam,
+.awayTeam {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 0.75rem;
+}
+
+.homeTeam .scores,
+.awayTeam .scores {
+  display: inline-block;
+}
+
+.winner {
+  position: relative;
+}
+
+.winner::after {
+  width: 8px;
+  content: url("../public/arrow.svg");
+  position: absolute;
+  inset: 0 -12px auto auto;
+}
+
+.matchResults span {
+  display: block;
+}
