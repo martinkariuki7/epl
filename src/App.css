@@ -18,10 +18,10 @@ a {
   --gray: #333;
 }
 
-/* .my-container {
-  width: min(100% - 2rem, 752px);
-  margin-inline: auto;
-} */
+body,
+html {
+  font-family: var(--body-font);
+}
 
 .preloader {
   width: 100%;

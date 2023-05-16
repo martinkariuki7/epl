@@ -11,6 +11,8 @@ export interface PlayersInterface {
   };
 }
 
+export interface PlayersInterfaceArray extends Array<PlayersInterface> {}
+
 interface Props {
   player: PlayersInterface;
 }
