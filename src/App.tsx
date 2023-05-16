@@ -171,11 +171,10 @@ const App = () => {
   };
 
   return (
-    <div className="app-wrapper">
+    <>
       <AppHeader
         teamColor={teamColor ? teamColor : defaultHeaderColor}
         teamName={teamName}
-        setTeamColor={setTeamColor}
       />
       {error && <p className="text-danger mt-3 mb-3 text-center">{error}</p>}
       {isLoading && (
@@ -217,7 +216,7 @@ const App = () => {
         <Route path="/players" element={<Players players={players} />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-    </div>
+    </>
   );
 };
 

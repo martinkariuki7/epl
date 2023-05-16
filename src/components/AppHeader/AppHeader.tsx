@@ -8,10 +8,9 @@ import styles from "./AppHeader.module.css";
 interface Props {
   teamColor: string;
   teamName: string;
-  setTeamColor: (color: string) => void;
 }
 
-const AppHeader = ({ teamColor, teamName, setTeamColor }: Props) => {
+const AppHeader = ({ teamColor, teamName }: Props) => {
   const [isToggled, setToggle] = useState(true);
   const [theme, setTheme] = useState("dark");
   const [routeType, setRouteType] = useState("");
