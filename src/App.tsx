@@ -15,7 +15,10 @@ import Players from "./pages/Players";
 import SingleTeamMatches from "./pages/SingleTeamMatches";
 import MatchHighlightsIcon from "./assets/match-highlights.png";
 
-import { PlayersInterface, PlayersInterfaceArray } from "./pages/Players";
+import {
+  PlayersInterface,
+  PlayersInterfaceArray,
+} from "./components/Player/player";
 import { HandleMatchResults, Match } from "./pages/Matches";
 
 import "bootstrap/dist/css/bootstrap.min.css";

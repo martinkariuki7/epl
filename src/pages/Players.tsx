@@ -1,31 +1,24 @@
-export interface PlayersInterface {
-  title: {
-    rendered: string;
-  };
-  id: number;
-  fimg_url: string;
-  acf: {
-    position: string;
-  };
-}
+import Player from "../components/Player/player";
+import { PlayersInterface } from "../components/Player/player";
 
 interface Props {
   players: PlayersInterface[];
 }
 
-export interface PlayersInterfaceArray extends Array<PlayersInterface> {}
+const styles = {
+  display: "grid",
+  gridTemplateColumns: "repeat(7, 1fr)",
+  gap: "1em",
+  marginBottom: "3em",
+  width: "min(100% - 2rem, 752px)",
+  marginInline: "auto",
+};
 
 const Players = ({ players }: Props) => {
   return (
-    <div className="my-container players-wrapper">
+    <div style={styles}>
       {players.map((player) => (
-        <div className="single-player" key={player.id}>
-          <img src={player.fimg_url} alt={player.title.rendered} />
-          <div className="single-player-description">
-            <p> {player.title.rendered}</p>
-            <span>{player.acf.position}</span>
-          </div>
-        </div>
+        <Player key={player.id} player={player} />
       ))}
     </div>
   );

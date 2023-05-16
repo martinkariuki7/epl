@@ -1,0 +1,24 @@
+.singlePlayer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #333;
+  border-radius: 6px;
+  align-items: center;
+}
+
+.singlePlayer img {
+  width: 96px;
+  height: auto;
+}
+
+.singlePlayerDescription {
+  padding: 1em;
+}
+
+.singlePlayerDescription p {
+  margin: 0;
+  font-size: 14px;
+}
+.singlePlayerDescription span {
+  font-size: 12px;
+}

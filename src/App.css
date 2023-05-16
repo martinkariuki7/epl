@@ -18,42 +18,11 @@ a {
   --gray: #333;
 }
 
-.my-container {
+/* .my-container {
   width: min(100% - 2rem, 752px);
   margin-inline: auto;
-}
+} */
 
-.players-wrapper {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1em;
-  margin-bottom: 3em;
-}
-
-.single-player {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #333;
-  border-radius: 6px;
-  align-items: center;
-}
-
-.single-player img {
-  width: 96px;
-  height: auto;
-}
-
-.single-player-description {
-  padding: 1em;
-}
-
-.single-player-description p {
-  margin: 0;
-  font-size: 14px;
-}
-.single-player-description span {
-  font-size: 12px;
-}
 .preloader {
   width: 100%;
   height: 100vh;
