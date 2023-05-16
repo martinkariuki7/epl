@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 
 import { formatDate } from "./utils/FormatDate";
@@ -53,13 +53,16 @@ const App = () => {
   const API_FIXTURES_URL = import.meta.env.VITE_APP_API_FIXTURES_URL;
   const API_PLAYERS_URL = import.meta.env.VITE_APP_API_PLAYERS_URL;
 
+  const defaultHeaderColor = "#341449";
+  const location = useLocation();
+
   const [isLoading, setLoading] = useState(false);
   const [teams, setTeams] = useState<Team[]>([]);
   const [error, setError] = useState("");
   const [players, setPlayers] = useState<PlayersInterface[]>([]);
   const [matches, setMatches] = useState<Match[]>([]);
   const [teamId, setTeamId] = useState(0);
-  const [teamColor, setTeamColor] = useState("#341449");
+  const [teamColor, setTeamColor] = useState(defaultHeaderColor);
   const [teamName, setTeamName] = useState("");
   const navigate = useNavigate(); // Hook into the navigate
 
@@ -91,6 +94,14 @@ const App = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  /* Reset header color
+  BANDAID solution, to be refactored.
+  */
+  useEffect(() => {
+    if (!location.pathname.includes("matches/"))
+      setTeamColor(defaultHeaderColor);
+  }, [location]);
 
   // Handle programmatic navigation to a single team's matches
   const handleTeamMatches = (id: number, color: string, teamName: string) => {
@@ -159,8 +170,9 @@ const App = () => {
   return (
     <div className="app-wrapper">
       <AppHeader
-        teamColor={teamColor ? teamColor : "#341449"}
+        teamColor={teamColor ? teamColor : defaultHeaderColor}
         teamName={teamName}
+        setTeamColor={setTeamColor}
       />
       {error && <p className="text-danger mt-3 mb-3 text-center">{error}</p>}
       {isLoading && (
