@@ -16,12 +16,16 @@ const News = () => {
   const API_NEWS_URL = import.meta.env.VITE_APP_API_NEWS_URL;
   const [news, setNews] = useState<News[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get<News[]>(API_NEWS_URL)
       .then((res) => setNews(res.data))
+      .then(() => setLoading(false))
       .catch((err) => {
+        setLoading(false);
         setError(err.message);
         setNews([]);
       });
@@ -32,6 +36,7 @@ const News = () => {
 
   return (
     <ul className={styles.newsWrapper}>
+      {isLoading && <li className="text-center mt-5">Loading..</li>}
       {news.map((news) => (
         <li className={styles.singleNewsWrapper} key={news.id}>
           <div>
