@@ -1,7 +1,8 @@
-export interface NewsPageInterface {}
+import * as React from "react";
+import News from "../components/News/news";
 
 const NewsPage = () => {
-  return <h1>News</h1>;
+  return <News />;
 };
 
 export default NewsPage;

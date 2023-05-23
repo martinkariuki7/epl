@@ -1,0 +1,26 @@
+.newsWrapper {
+  width: min(100% - 2rem, 752px);
+  margin-inline: auto;
+  list-style-type: none;
+}
+.singleNewsWrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 1em;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 1em;
+  margin: 0 0 1em;
+}
+
+.singleNewsWrapper h2 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.singleNewsWrapper img {
+  max-width: 100%;
+  height: auto;
+  justify-self: right;
+  border-radius: 3px;
+}
