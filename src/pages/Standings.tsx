@@ -4,6 +4,7 @@ import Table from "../components/Table/Table";
 interface Props {
   teams: Team[];
   handleTeamMatches: HandleTeamMatches;
+  fixtures: any[];
 }
 
 const styles = {
@@ -11,10 +12,14 @@ const styles = {
   marginInline: "auto",
 };
 
-const Standings = ({ teams, handleTeamMatches }: Props) => {
+const Standings = ({ teams, handleTeamMatches, fixtures }: Props) => {
   return (
     <div style={styles}>
-      <Table teams={teams} handleTeamMatches={handleTeamMatches} />
+      <Table
+        teams={teams}
+        handleTeamMatches={handleTeamMatches}
+        fixtures={fixtures}
+      />
     </div>
   );
 };

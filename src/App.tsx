@@ -69,7 +69,6 @@ const App = () => {
   const [teamName, setTeamName] = useState("");
   const navigate = useNavigate(); // Hook into the navigate
 
-  //
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
@@ -93,7 +92,7 @@ const App = () => {
     }
   }, []);
 
-  // Fetch teams data effect
+  // Fetch app data
   useEffect(() => {
     fetchData();
   }, []);
@@ -172,21 +171,25 @@ const App = () => {
 
   return (
     <>
-      <AppHeader
-        teamColor={teamColor ? teamColor : defaultHeaderColor}
-        teamName={teamName}
-      />
-      {error && <p className="text-danger mt-3 mb-3 text-center">{error}</p>}
       {isLoading && (
         <div className="preloader">
           <div className="spinner-border"></div>
         </div>
       )}
+      <AppHeader
+        teamColor={teamColor ? teamColor : defaultHeaderColor}
+        teamName={teamName}
+      />
+      {error && <p className="text-danger mt-3 mb-3 text-center">{error}</p>}
       <Routes>
         <Route
           index
           element={
-            <Standings teams={teams} handleTeamMatches={handleTeamMatches} />
+            <Standings
+              teams={teams}
+              handleTeamMatches={handleTeamMatches}
+              fixtures={matches}
+            />
           }
         />
         <Route

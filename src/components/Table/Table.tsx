@@ -14,9 +14,293 @@ interface SortColumn {
 interface Props {
   teams: Team[];
   handleTeamMatches: HandleTeamMatches;
+  fixtures: any[];
 }
 
-const Table = ({ teams, handleTeamMatches }: Props) => {
+const Table = ({ teams, handleTeamMatches, fixtures }: Props) => {
+  // Calculate how many matches a team has played
+  const getMatchesPlayed = (id: number, array: any[]) => {
+    let matchesPlayed = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = 0; j < matches.length; j++) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          if (match.home_team === id || match.away_team === id) {
+            matchesPlayed++;
+          }
+        }
+      }
+    }
+
+    return matchesPlayed;
+  };
+
+  // Calculate a team's overall points
+  const getTeamPoints = (id: number, array: any[]) => {
+    let points = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = 0; j < matches.length; j++) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          const homeTeam = match.home_team;
+          const awayTeam = match.away_team;
+          const homeGoals = parseInt(match.home_team_goals);
+          const awayGoals = parseInt(match.away_team_goals);
+
+          if (homeTeam === id) {
+            if (homeGoals > awayGoals) {
+              points += 3; // Home team won
+            } else if (homeGoals === awayGoals) {
+              points += 1; // Home team drew
+            }
+          } else if (awayTeam === id) {
+            if (awayGoals > homeGoals) {
+              points += 3; // Away team won
+            } else if (homeGoals === awayGoals) {
+              points += 1; // Away team drew
+            }
+          }
+        }
+      }
+    }
+
+    return points;
+  };
+
+  // Calculate a team's matches won
+  const getMatchesWon = (id: number, array: any[]) => {
+    let matchesWon = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = 0; j < matches.length; j++) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          const homeTeam = match.home_team;
+          const awayTeam = match.away_team;
+          const homeGoals = parseInt(match.home_team_goals);
+          const awayGoals = parseInt(match.away_team_goals);
+
+          if (homeTeam === id && homeGoals > awayGoals) {
+            matchesWon++; // Home team won the match
+          } else if (awayTeam === id && awayGoals > homeGoals) {
+            matchesWon++; // Away team won the match
+          }
+        }
+      }
+    }
+
+    return matchesWon;
+  };
+
+  // Calculate a team's matches lost
+  const getMatchesLost = (id: number, array: any[]) => {
+    let matchesLost = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = 0; j < matches.length; j++) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          const homeTeam = match.home_team;
+          const awayTeam = match.away_team;
+          const homeGoals = parseInt(match.home_team_goals);
+          const awayGoals = parseInt(match.away_team_goals);
+
+          if (homeTeam === id && homeGoals < awayGoals) {
+            matchesLost++; // Home team lost the match
+          } else if (awayTeam === id && awayGoals < homeGoals) {
+            matchesLost++; // Away team lost the match
+          }
+        }
+      }
+    }
+
+    return matchesLost;
+  };
+
+  // Calculate a team's matches drawn
+  const getMatchesDrawn = (id: number, array: any[]) => {
+    let matchesDrawn = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = 0; j < matches.length; j++) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          const homeTeam = match.home_team;
+          const awayTeam = match.away_team;
+          const homeGoals = parseInt(match.home_team_goals);
+          const awayGoals = parseInt(match.away_team_goals);
+
+          if (homeTeam === id && homeGoals === awayGoals) {
+            matchesDrawn++; // Match ended in a draw for the home team
+          } else if (awayTeam === id && awayGoals === homeGoals) {
+            matchesDrawn++; // Match ended in a draw for the away team
+          }
+        }
+      }
+    }
+
+    return matchesDrawn;
+  };
+
+  // Calculate a teams goals for.
+  const getTeamGoalsFor = (id: number, array: any[]) => {
+    let goalsFor = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = 0; j < matches.length; j++) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          const homeTeam = match.home_team;
+          const awayTeam = match.away_team;
+          const homeGoals = parseInt(match.home_team_goals);
+          const awayGoals = parseInt(match.away_team_goals);
+
+          if (homeTeam === id) {
+            goalsFor += homeGoals; // Add home team's goals
+          } else if (awayTeam === id) {
+            goalsFor += awayGoals; // Add away team's goals
+          }
+        }
+      }
+    }
+
+    return goalsFor;
+  };
+
+  // Calculate a team's goals conceded
+  const getTeamGoalsAgainst = (id: number, array: any[]) => {
+    let goalsAgainst = 0;
+
+    for (let i = 0; i < array.length; i++) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = 0; j < matches.length; j++) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          const homeTeam = match.home_team;
+          const awayTeam = match.away_team;
+          const homeGoals = parseInt(match.home_team_goals);
+          const awayGoals = parseInt(match.away_team_goals);
+
+          if (homeTeam === id) {
+            goalsAgainst += awayGoals; // Add away team's goals
+          } else if (awayTeam === id) {
+            goalsAgainst += homeGoals; // Add home team's goals
+          }
+        }
+      }
+    }
+
+    return goalsAgainst;
+  };
+
+  // Get latest match result
+  const checkLastFiveGames = (id: number, array: any[]) => {
+    const lastFiveGames = [];
+
+    for (let i = array.length - 1; i >= 0; i--) {
+      const game = array[i];
+      const matches = game.acf.matches;
+
+      for (let j = matches.length - 1; j >= 0; j--) {
+        const match = matches[j];
+
+        if (
+          !match.ispostponed &&
+          match.home_team_goals !== "" &&
+          match.away_team_goals !== ""
+        ) {
+          const homeTeam = match.home_team;
+          const awayTeam = match.away_team;
+          const homeGoals = parseInt(match.home_team_goals);
+          const awayGoals = parseInt(match.away_team_goals);
+
+          let gameResult = null;
+
+          if (homeTeam === id) {
+            if (homeGoals > awayGoals) {
+              gameResult = <img src={winIcon} alt="win icon" />; // Home team won
+            } else if (homeGoals === awayGoals) {
+              gameResult = <img src={drawIcon} alt="draw icon" />; // Home team drew
+            } else {
+              gameResult = <img src={lostIcon} alt="loss icon" />; // Home team lost
+            }
+          } else if (awayTeam === id) {
+            if (awayGoals > homeGoals) {
+              gameResult = <img src={winIcon} alt="win icon" />; // Away team won
+            } else if (homeGoals === awayGoals) {
+              gameResult = <img src={drawIcon} alt="draw icon" />; // Away team drew
+            } else {
+              gameResult = <img src={lostIcon} alt="loss icon" />; // Away team lost
+            }
+          }
+
+          if (gameResult !== null) {
+            lastFiveGames.push(gameResult);
+          }
+        }
+      }
+    }
+
+    return lastFiveGames;
+  };
+
   const [sortColumn, setSortColumn] = useState<SortColumn>({
     path: "acf.points",
     order: "desc",
@@ -135,17 +419,7 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
         {sorted.map((team: Team, index: number) => {
           const {
             title: { rendered: team_name },
-            acf: {
-              matches_played,
-              matches_won,
-              matches_drawn,
-              matches_lost,
-              goals_for,
-              goals_against,
-              goal_difference,
-              points,
-              team_color,
-            },
+            acf: { team_color },
           } = team;
           return (
             <tr
@@ -160,21 +434,24 @@ const Table = ({ teams, handleTeamMatches }: Props) => {
                 />
                 {team.title.rendered}
               </td>
-              <td>{matches_played}</td>
-              <td>{matches_won}</td>
-              <td>{matches_drawn}</td>
-              <td>{matches_lost}</td>
-              <td>{goals_for}</td>
-              <td>{goals_against}</td>
-              <td>{parseInt(goal_difference)}</td>
-              <td>{points}</td>
+              <td>{getMatchesPlayed(team.id, fixtures)}</td>
+              <td>{getMatchesWon(team.id, fixtures)}</td>
+              <td>{getMatchesDrawn(team.id, fixtures)}</td>
+              <td>{getMatchesLost(team.id, fixtures)}</td>
+              <td>{getTeamGoalsFor(team.id, fixtures)}</td>
+              <td>{getTeamGoalsAgainst(team.id, fixtures)}</td>
+              <td>
+                {getTeamGoalsFor(team.id, fixtures) -
+                  getTeamGoalsAgainst(team.id, fixtures)}
+              </td>
+              <td>{getTeamPoints(team.id, fixtures)}</td>
               <td className={styles.winDrawLost}>
                 <div className="d-flex justify-content-center">
-                  <img src={winIcon} alt="win icon" />
-                  <img src={winIcon} alt="win icon" />
-                  <img src={winIcon} alt="win icon" />
-                  <img src={drawIcon} alt="draw icon" />
-                  <img src={lostIcon} alt="lost icon" />
+                  {checkLastFiveGames(team.id, fixtures).map(
+                    (result, index) => (
+                      <span key={index}>{result}</span>
+                    )
+                  )}
                 </div>
               </td>
             </tr>
