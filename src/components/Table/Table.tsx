@@ -294,6 +294,8 @@ const Table = ({ teams, handleTeamMatches, fixtures }: Props) => {
           if (gameResult !== null) {
             lastFiveGames.push(gameResult);
           }
+
+          if (lastFiveGames.length === 5) return lastFiveGames;
         }
       }
     }
