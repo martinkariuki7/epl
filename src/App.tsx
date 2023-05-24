@@ -34,15 +34,6 @@ export interface Team {
   };
   fimg_url: string;
   acf: {
-    goal_difference: string;
-    goals_against: string;
-    goals_for: string;
-    last_5: string;
-    matches_drawn: string;
-    matches_lost: string;
-    matches_played: string;
-    matches_won: string;
-    points: string;
     team_color: string;
   };
 }
