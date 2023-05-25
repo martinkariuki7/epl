@@ -1,5 +1,6 @@
 import { HandleTeamMatches, Team } from "../App";
 import Table from "../components/Table/Table";
+import TableKey from "../components/TableKey/TableKey";
 
 interface Props {
   teams: Team[];
@@ -20,6 +21,7 @@ const Standings = ({ teams, handleTeamMatches, fixtures }: Props) => {
         handleTeamMatches={handleTeamMatches}
         fixtures={fixtures}
       />
+      <TableKey />
     </div>
   );
 };

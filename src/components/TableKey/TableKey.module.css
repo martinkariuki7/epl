@@ -1,0 +1,54 @@
+.tableKeyWrapper {
+  background-color: #3a3a3a;
+  border-radius: 6px;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 1em;
+}
+.tableKeyWrapper h5 {
+  font-size: 13px;
+  font-weight: 700;
+}
+.tableKeyWrapper li {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 400;
+}
+.tableKeyWrapper ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.leagueMarker {
+  border-radius: 1px;
+  display: inline-block;
+  height: 8px;
+  vertical-align: middle;
+  width: 8px;
+  margin-right: 8px;
+}
+.cl {
+  background-color: #4285f4;
+}
+.europa {
+  background-color: #fa7b17;
+}
+.europaConference {
+  background-color: #34a853;
+}
+.relegation {
+  background-color: #ea4335;
+}
+.lastFiveMatches img {
+  width: 12px;
+  height: auto;
+  margin-right: 8px;
+}
+
+@media (max-width: 650px) {
+  .tableKeyWrapper {
+    grid-template-columns: 1fr;
+  }
+}

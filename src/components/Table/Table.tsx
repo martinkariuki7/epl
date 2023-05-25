@@ -32,13 +32,11 @@ const Table = ({ teams, handleTeamMatches, fixtures }: Props) => {
 
   const handleSort = (path: string) => {
     if (sortColumn.path === path) {
-      // If the same column is clicked, toggle the sorting order
       setSortColumn({
         ...sortColumn,
         order: sortColumn.order === "asc" ? "desc" : "asc",
       });
     } else {
-      // If a different column is clicked, set the new sorting path and order
       setSortColumn({
         path,
         order: "asc",
@@ -51,41 +49,35 @@ const Table = ({ teams, handleTeamMatches, fixtures }: Props) => {
     MP
   </th>;
 
+  // Ugly code, consider refactoring
   const sorted = _.orderBy(
     teams,
     [
       (team: Team) => {
-        // Add the sorting path for matches played
         if (sortColumn.path === "MP") {
           return getMatchesPlayed(team.id, fixtures);
         }
 
-        // Add the sorting path for matches won
         if (sortColumn.path === "W") {
           return getMatchesWon(team.id, fixtures);
         }
 
-        // Add the sorting path for matches drawn
         if (sortColumn.path === "D") {
           return getMatchesDrawn(team.id, fixtures);
         }
 
-        // Add the sorting path for matches lost
         if (sortColumn.path === "L") {
           return getMatchesLost(team.id, fixtures);
         }
 
-        // Add the sorting path for goals for
         if (sortColumn.path === "GF") {
           return getTeamGoalsFor(team.id, fixtures);
         }
 
-        // Add the sorting path for goals against
         if (sortColumn.path === "GA") {
           return getTeamGoalsAgainst(team.id, fixtures);
         }
 
-        // Add the sorting path for goal difference
         if (sortColumn.path === "GD") {
           return (
             getTeamGoalsFor(team.id, fixtures) -
@@ -93,7 +85,6 @@ const Table = ({ teams, handleTeamMatches, fixtures }: Props) => {
           );
         }
 
-        // Add the sorting path for points
         if (sortColumn.path === "Pts") {
           return getTeamPoints(team.id, fixtures);
         }
