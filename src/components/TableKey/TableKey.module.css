@@ -47,6 +47,12 @@
   margin-right: 8px;
 }
 
+[data-bs-theme="light"] .tableKeyWrapper {
+  color: #000;
+  background-color: #fff;
+  /* Other styles */
+}
+
 @media (max-width: 650px) {
   .tableKeyWrapper {
     grid-template-columns: 1fr;
