@@ -3,7 +3,12 @@ table {
   font-size: 14px;
   min-width: 577px;
 }
-
+.table > :not(caption) > * > * {
+  padding: 0 !important;
+}
+tr {
+  vertical-align: middle;
+}
 tr:hover {
   cursor: pointer;
 }
@@ -17,23 +22,20 @@ tr:hover {
   height: auto;
   margin: 3px 5px 0 0;
 }
+.leagueMarker {
+  width: 2px;
+  height: 40px;
+  margin-right: 6px;
+}
 .championsLeague {
   background-color: #4285f4;
-  width: 2px;
-  height: 30px;
 }
 .europa {
   background-color: #f48342;
-  width: 2px;
-  height: 30px;
 }
 .conferenceLeague {
   background-color: #42f457;
-  width: 2px;
-  height: 30px;
 }
 .relegation {
   background-color: #f44242;
-  width: 2px;
-  height: 30px;
 }

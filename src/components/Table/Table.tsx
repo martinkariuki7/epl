@@ -154,7 +154,9 @@ const Table = ({ teams, handleTeamMatches, fixtures }: Props) => {
                 }
               >
                 <th>
-                  <div className={columnBadge}></div>
+                  <div
+                    className={[columnBadge, styles.leagueMarker].join(" ")}
+                  ></div>
                 </th>
                 <th>{index + 1}</th>
                 <td className={styles.teamBranding} colSpan={8}>
