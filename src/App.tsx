@@ -115,7 +115,7 @@ const App = () => {
     if (ispostponed) {
       return (
         <>
-          <span style={{ color: "yellow" }}>Postponed</span>
+          <span style={{ color: "#FFCC00" }}>Postponed</span>
           <span>Time TBD</span>
         </>
       );
