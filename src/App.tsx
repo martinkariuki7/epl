@@ -10,7 +10,6 @@ import Standings from "./pages/Standings";
 import NotFound from "./pages/NotFound";
 import Matches from "./pages/Matches";
 import NewsPage from "./pages/News";
-import Stats from "./pages/Stats";
 import Players from "./pages/Players";
 import SingleTeamMatches from "./pages/SingleTeamMatches";
 import MatchHighlightsIcon from "./assets/match-highlights.png";
@@ -206,7 +205,6 @@ const App = () => {
           }
         />
         <Route path="/news" element={<NewsPage />} />
-        <Route path="/stats" element={<Stats />} />
         <Route path="/players" element={<Players players={players} />} />
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

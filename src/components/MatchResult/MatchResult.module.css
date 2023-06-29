@@ -50,7 +50,7 @@
 
 .winner::after {
   width: 8px;
-  content: url("../public/arrow.svg");
+  content: url("/arrow.svg");
   position: absolute;
   inset: 0 -12px auto auto;
 }
